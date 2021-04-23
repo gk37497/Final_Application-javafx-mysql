@@ -27,9 +27,6 @@ public class TodayPageController {
     private TextField todayTaskField;
 
     @FXML
-    private Spinner<Integer> spinnerTIme;
-
-    @FXML
     private ListView<BorderPane> completedList;
 
     @FXML
