@@ -1,0 +1,12 @@
+.list-cell {
+    -fx-control-inner-background: #2B6B89;
+      -fx-background-color: -fx-box-border, #2B6B89;
+      -fx-background-insets: 0;
+      -fx-padding: 5,0,5,0;
+}
+.list-view, .split-pane {
+       -fx-background-insets: 0;
+       -fx-padding: 0;
+ }
+
+
