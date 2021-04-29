@@ -8,13 +8,13 @@ import javafx.scene.control.*;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
+import sample.java.dao.taskDao;
 import sample.java.model.Task;
 
 import java.time.LocalDate;
 
 public class TaskPagesService {
 
-    public Stage dialogStage;
     public ListView<BorderPane> listView;
     public ListView<BorderPane> completedListView;
 
@@ -22,6 +22,7 @@ public class TaskPagesService {
 
             this.listView = listView;
             this.completedListView = completedListView;
+
             RadioButton radioButton = new RadioButton();
             BorderPane borderPane = new BorderPane();
             Button deleteBtn = new Button("delete");
@@ -30,10 +31,13 @@ public class TaskPagesService {
             radioButton.selectedProperty().addListener(new ChangeListener<Boolean>() {
                 @Override
                 public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
-                    if(radioButton.isSelected() && newTask.getType().equals("active")){
+                    if(radioButton.isSelected() && !newTask.isCompleted()){
                         borderPane.setDisable(true);
                         radioButton.setSelected(true);
-                        newTask.setType("completed");
+                        newTask.setCompleted(true);
+
+                        taskDao.updateCompletedCol(newTask);
+
                         listView.getItems().remove(borderPane);
                         completedListView.getItems().add(borderPane);
                         completedListView.setVisible(true);
@@ -46,6 +50,7 @@ public class TaskPagesService {
                  public void handle(ActionEvent e)
                  {
                      listView.getItems().remove(borderPane);
+                     taskDao.deleteTask(newTask);
                   }
                 };
             deleteBtn.setOnAction(event);
@@ -81,48 +86,7 @@ public class TaskPagesService {
          }
 
 
-    public void validAlert(Stage dialogStage , String errMessage){
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.initOwner(dialogStage);
-            alert.setTitle("Invalid Fields");
-            alert.setHeaderText("Please correct invalid fields");
-            alert.setContentText(errMessage);
-
-            alert.showAndWait();
-        }
-
-
     public String firstLetterUpper(String s){
             return s.charAt(0) + s.substring(1).toLowerCase();
         }
-
-
-    public Boolean isInputValidTasksPage(TextField taskTitleField , DatePicker datePicker){
-            String errorMessage = "";
-
-            if (taskTitleField.getText().isEmpty())
-                errorMessage = "No valid Task title !!!";
-            if (datePicker.getValue() == null)
-                errorMessage = errorMessage + " No valid Task Date !!!";
-             if (errorMessage.length() == 0)
-                return true;
-            else{
-                validAlert(this.dialogStage ,errorMessage);
-                return false;
-                }
-        }
-
-    public Boolean isInputValidTodayPage(TextField taskTitleField){
-        String errorMessage = "";
-
-        if (taskTitleField.getText().isEmpty())
-            errorMessage = "No valid Task title !!!";
-        if (errorMessage.length() == 0)
-            return true;
-        else{
-            validAlert(this.dialogStage ,errorMessage);
-            return false;
-        }
-    }
-
 }

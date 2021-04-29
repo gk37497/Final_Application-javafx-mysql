@@ -11,6 +11,10 @@ public class Challenge {
     final IntegerProperty duration;
     final StringProperty type;
 
+    //Default constructor
+    public Challenge(){ this(null,null,null,0,null); }
+
+    //Parameter constructor
     public Challenge(String title ,String description , LocalDate startedDate , int duration ,String type) {
         this.title = new SimpleStringProperty(title);
         this.description = new SimpleStringProperty(description);
@@ -19,17 +23,11 @@ public class Challenge {
         this.type = new SimpleStringProperty(type);
     }
 
-    public String getType() {
-        return type.get();
-    }
+    public String getType() { return type.get(); }
 
-    public StringProperty typeProperty() {
-        return type;
-    }
+    public StringProperty typeProperty() { return type; }
 
-    public void setType(String type) {
-        this.type.set(type);
-    }
+    public void setType(String type) { this.type.set(type); }
 
     public int getDuration() { return duration.get(); }
 

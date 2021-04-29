@@ -43,6 +43,7 @@ public class WeekSchedulePageController {
     //set main
     public void setMain(Main main){
         this.main = main;
+
         scheduleMaker("MONDAY" , mondayList);
         scheduleMaker("TUESDAY" , tuesdayList);
         scheduleMaker("WEDNESDAY" , wednesdayList);
@@ -50,6 +51,7 @@ public class WeekSchedulePageController {
         scheduleMaker("FRIDAY" , fridayList);
         scheduleMaker("SATURDAY" , saturdayList);
         scheduleMaker("SUNDAY" , sundayList);
+
         mottoText.setText("\"The greatest glory in living lies not in never falling, but in rising every time we fall.\" -Nelson Mandela");
     }
 }

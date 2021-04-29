@@ -10,6 +10,7 @@ import javafx.stage.Stage;
 import sample.Main;
 import sample.java.model.Task;
 import sample.java.service.TaskPagesService;
+import sample.java.service.Validations;
 
 import java.time.LocalDate;
 
@@ -18,6 +19,7 @@ public class TaskPageController {
     public Main main;
     public Stage dialogStage;
     public TaskPagesService service = new TaskPagesService();
+    public Validations validations = new Validations();
 
     @FXML
     public ListView<BorderPane> tasksList;
@@ -25,9 +27,6 @@ public class TaskPageController {
     @FXML
     private ListView<BorderPane> completedList;
 
-    @FXML
-    void initialize(){
-    }
     @FXML
     private TextField taskTitleField;
 
@@ -45,8 +44,10 @@ public class TaskPageController {
         this.main = main;
         main.getTasksList().clear();
         main.getCompletedTasks().clear();
-        main.getTasksData().filtered(task -> task.getType().equals("active")).forEach(e->main.getTasksList().add(service.Maker(e , tasksList, completedList)));
-        main.getTasksData().filtered(task -> task.getType().equals("completed")).forEach(e->main.getCompletedTasks().add(service.Maker(e,tasksList,completedList)));
+
+        main.getTasksData().filtered(task ->!task.isCompleted()).forEach(e->main.getTasksList().add(service.Maker(e , tasksList, completedList)));
+        main.getTasksData().filtered(Task::isCompleted).forEach(e->main.getCompletedTasks().add(service.Maker(e,tasksList,completedList)));
+
         tasksList.setItems(main.getTasksList());
         completedList.setItems(main.getCompletedTasks());
     }
@@ -58,17 +59,17 @@ public class TaskPageController {
     //handle add button
     public void handleBtn(){
 
-        if (service.isInputValidTasksPage(taskTitleField , datePicker)) {
+        if (validations.isInputValidTasksPage(taskTitleField , datePicker)) {
             String title =  taskTitleField.getText();
             LocalDate date = datePicker.getValue();
 
-
-            Task newTask = new Task(title, "active", date);
+            Task newTask = new Task(title, "task" , false, date);
             main.getTasksData().add(newTask);
             main.getTasksList().add(service.Maker(newTask , tasksList , completedList));
         }
 
         taskTitleField.setText("");
+        taskTitleField.setFocusTraversable(true);
     }
 
 }

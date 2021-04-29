@@ -7,5 +7,18 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="module-library" scope="RUNTIME">
+      <library>
+        <CLASSES />
+        <JAVADOC>
+          <root url="jar://$USER_HOME$/Downloads/charm-glisten-4.4.1-javadoc.jar!/" />
+        </JAVADOC>
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="library" name="fontawesomefx-8.9" level="project" />
+    <orderEntry type="library" name="ikonli-javafx-11.3.4" level="project" />
+    <orderEntry type="library" name="ikonli-core-11.3.4" level="project" />
+    <orderEntry type="library" name="mysql:mysql-connector-java:8.0.24" level="project" />
   </component>
 </module>

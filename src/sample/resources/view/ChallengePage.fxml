@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Accordion?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="605.0" prefWidth="700.0" style="-fx-background-color: #635A6F;" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.java.controller.ChallengePageController">
+<BorderPane prefHeight="605.0" prefWidth="700.0" style="-fx-background-color: #635A6F;" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.java.controller.ChallengePageController">
    <top>
       <AnchorPane prefHeight="50.0" prefWidth="600.0" BorderPane.alignment="CENTER">
          <children>
@@ -23,15 +23,14 @@
    <bottom>
       <AnchorPane prefHeight="50.0" prefWidth="600.0" BorderPane.alignment="CENTER">
          <children>
-            <Button layoutX="599.0" layoutY="12.0" mnemonicParsing="false" onAction="#handleAddBtn" text="Button" />
+            <TextField fx:id="challengeTitleField" layoutX="189.0" layoutY="12.0" prefHeight="30.0" prefWidth="660.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="5.0" />
+            <Button defaultButton="true" layoutX="613.0" layoutY="8.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#handleAddBtn" prefHeight="28.0" prefWidth="58.0" style="-fx-background-color: #635a6f;" text="ADD" textFill="#f7f6f8" AnchorPane.bottomAnchor="14.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="8.0" />
          </children></AnchorPane>
    </bottom>
    <center>
       <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <children>
-            <ListView fx:id="challengesList" layoutX="226.0" layoutY="134.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="40.0" AnchorPane.rightAnchor="40.0" AnchorPane.topAnchor="20.0" />
-            <Button cancelButton="true" layoutX="599.0" layoutY="464.0" mnemonicParsing="false" onAction="#handleDeleteBtn" text="Delete" />
-            <Accordion layoutX="89.0" layoutY="71.0" prefHeight="151.0" prefWidth="546.0" />
+            <ListView fx:id="challengesList" layoutX="226.0" layoutY="134.0" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #635A6F;" stylesheets="@../css/challengePageStyle.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="40.0" AnchorPane.rightAnchor="40.0" AnchorPane.topAnchor="20.0" />
          </children></AnchorPane>
    </center>
 </BorderPane>
