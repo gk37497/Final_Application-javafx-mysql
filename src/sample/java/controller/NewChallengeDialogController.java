@@ -9,14 +9,18 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import sample.Main;
+import sample.java.dao.TaskDao;
 import sample.java.model.Challenge;
-import sample.java.service.ChallengePageService;
+import sample.java.model.Task;
 import sample.java.service.Validations;
+
+import java.time.LocalDate;
 
 public class NewChallengeDialogController {
 
     public Stage dialogStage;
     public Boolean okClicked = false;
+    public Main main;
 
     public Validations validations = new Validations();
 
@@ -43,6 +47,7 @@ public class NewChallengeDialogController {
 //Set Challenge
 public void setChallenge(Challenge newChallenge, String title){
     this.challenge = newChallenge;
+
     challengeTitleLabel.setText(title);
     challenge.setTitle(title);
 }
@@ -61,19 +66,28 @@ public boolean isOkClicked(){
     @FXML
     void handleStart(ActionEvent event) {
 
-    if(validations.isInputValidNewChallengeDialog(startDatePicker,challengeDesc,durationField)){
+    if(validations.newChallengeDialog(startDatePicker,challengeDesc,durationField)){
 
         challenge.setDescription(challengeDesc.getText());
         challenge.setStartedDate(startDatePicker.getValue());
         challenge.setDuration(Integer.parseInt(durationField.getText()));
         challenge.setType("active");
+        challenge.setCompleted(false);
+
+        for (int i = 0; i < challenge.getDuration(); i++) {
+            Task task = new Task(challenge.getTitle() + " "+ "day" + (i+1),"challenge",false, challenge.getStartedDate().plusDays(i));
+            TaskDao.writeTask(task);
+            main.getTasksData().add(task);
+        }
 
         okClicked = true;
         dialogStage.close();
     }
 }
 
-//Set Stage
+    public void setMain(Main main) { this.main = main; }
+
+    //Set Stage
     public void setStage(Stage dialogStage){
         this.dialogStage = dialogStage;
     }

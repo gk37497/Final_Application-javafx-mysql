@@ -5,28 +5,29 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
+import java.time.LocalDate;
+
 public class Validations {
 
-    public Alerts alerts = new Alerts();
     public Stage dialogStage;
 
-//Task fields validation
-    public Boolean isInputValidTasksPage(TextField taskTitleField , DatePicker datePicker){
+//Таск хуудасны баталгаажуулалт
+    public  Boolean taskPage(TextField taskTitleField , DatePicker datePicker){
         String errorMessage = "";
 
         if (taskTitleField.getText().isEmpty())
             errorMessage = "No valid Task title !!!";
-        if (datePicker.getValue() == null)
+        if (datePicker.getValue() == null && datePicker.getValue().isAfter(LocalDate.now()))
             errorMessage = errorMessage + " No valid Task Date !!!";
         if (errorMessage.length() == 0)
             return true;
         else{
-            alerts.validAlert(this.dialogStage ,errorMessage);
+            Alerts.validAlert(this.dialogStage ,errorMessage);
             return false;
         }
     }
-//Today pages validation
-    public Boolean isInputValidTodayPage(TextField taskTitleField){
+    //Today хуудасны баталгаажуулалт
+    public Boolean todayPage(TextField taskTitleField){
         String errorMessage = "";
 
         if (taskTitleField.getText().isEmpty())
@@ -34,13 +35,13 @@ public class Validations {
         if (errorMessage.length() == 0)
             return true;
         else{
-            alerts.validAlert(this.dialogStage ,errorMessage);
+            Alerts.validAlert(this.dialogStage ,errorMessage);
             return false;
         }
     }
 
-//Challenge page fields validation
-    public Boolean isInputValidChallengesPage(TextField taskTitleField){
+    //Challenge хуудасны баталгаажуулалт
+    public Boolean challengePage(TextField taskTitleField){
         String errorMessage = "";
 
         if (taskTitleField.getText().isEmpty())
@@ -48,24 +49,24 @@ public class Validations {
         if (errorMessage.length() == 0)
             return true;
         else{
-            alerts.validAlert(this.dialogStage ,errorMessage);
+            Alerts.validAlert(this.dialogStage ,errorMessage);
             return false;
         }
     }
 
-//New challenge dialog validation
-    public Boolean isInputValidNewChallengeDialog(DatePicker startDatePicker , TextArea challengeDesc , TextField durationField){
+    //New Challenge хуудасны баталгаажуулалт
+    public Boolean newChallengeDialog(DatePicker startDatePicker , TextArea challengeDesc , TextField durationField) throws NullPointerException{
         String errMessage = "";
 
-        if (startDatePicker.getValue() == null){
+        if (startDatePicker.getValue() == null && startDatePicker.getValue().getDayOfYear() <= LocalDate.now().getDayOfYear())
             errMessage = "No valid Start date!\n";
-        }
-        if (challengeDesc.getText().isEmpty()){
+
+        if (challengeDesc.getText().isEmpty())
             errMessage +="No valid Description !\n";
-        }
-        if (durationField.getText().isEmpty()){
+
+        if (durationField.getText().isEmpty())
             errMessage +="No valid Duration!\n";
-        }
+
         else{
             try {
                 if(Integer.parseInt(durationField.getText()) <= 0){
@@ -75,9 +76,10 @@ public class Validations {
                 errMessage += "No valid Duration (must be an integer)!\n";
             }
         }
-        if (errMessage.isEmpty()){return  true;}
+
+        if (errMessage.isEmpty())return  true;
         else {
-            alerts.validAlert(this.dialogStage , errMessage);
+            Alerts.validAlert(this.dialogStage , errMessage);
             return false;
         }
     }

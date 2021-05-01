@@ -26,7 +26,7 @@
     <show-object-properties value="true" />
     <loaded-nodes>
       <connection connection-id="37d95e5f-8cdb-44c0-9d20-2bc573494129">
-        <schema name="FinalProject" object-types="view, table, function, column" />
+        <schema name="FinalProject" object-types="view, function, table, column" />
       </connection>
     </loaded-nodes>
   </component>
@@ -34,12 +34,15 @@
     <connection id="37d95e5f-8cdb-44c0-9d20-2bc573494129">
       <console name="Connection 1" type="STANDARD" schema="FinalProject" session="Main"><![CDATA[select * from tasks
 
-insert into tasks
-values ('shalgaj bna','2021-04-23','task',0);
+insert into challenges
+values ('challenge1','shalgalt hiij bna','challenge','2021-04-29',5,0);
 
 update tasks
-set completed = 1
-where title = 'boljoogoozdee ene odoo']]></console>
+set completed = 0
+where title = 'new Challenge' and `date` = 'May 1, 2021, 12:00:00 AM'
+
+delete from tasks
+where title like 'dahiad neg harii%']]></console>
     </connection>
   </component>
   <component name="DBNavigator.Project.DatabaseFileManager">

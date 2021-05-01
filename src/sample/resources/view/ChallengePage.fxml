@@ -23,7 +23,7 @@
    <bottom>
       <AnchorPane prefHeight="50.0" prefWidth="600.0" BorderPane.alignment="CENTER">
          <children>
-            <TextField fx:id="challengeTitleField" layoutX="189.0" layoutY="12.0" prefHeight="30.0" prefWidth="660.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="5.0" />
+            <TextField fx:id="challengeTitleField" layoutX="189.0" layoutY="12.0" prefHeight="30.0" prefWidth="660.0" promptText="Add challenge" style="-fx-background-color: #111d27;" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="5.0" />
             <Button defaultButton="true" layoutX="613.0" layoutY="8.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#handleAddBtn" prefHeight="28.0" prefWidth="58.0" style="-fx-background-color: #635a6f;" text="ADD" textFill="#f7f6f8" AnchorPane.bottomAnchor="14.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="8.0" />
          </children></AnchorPane>
    </bottom>

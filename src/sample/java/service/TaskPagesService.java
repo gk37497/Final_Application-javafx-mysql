@@ -8,85 +8,97 @@ import javafx.scene.control.*;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
-import sample.java.dao.taskDao;
+import sample.java.dao.TaskDao;
 import sample.java.model.Task;
 
 import java.time.LocalDate;
+import java.util.Optional;
 
 public class TaskPagesService {
 
     public ListView<BorderPane> listView;
     public ListView<BorderPane> completedListView;
+    public Stage dialogStage;
 
-    public BorderPane Maker(Task newTask , ListView<BorderPane> listView , ListView<BorderPane> completedListView){
+    public  BorderPane maker(Task newTask , ListView<BorderPane> listView , ListView<BorderPane> completedListView){
+        this.completedListView = completedListView;
 
-            this.listView = listView;
-            this.completedListView = completedListView;
+        String month = firstLetterUpper(newTask.getDate().getMonth().toString());
+        String year = newTask.getDate().getYear() > LocalDate.now().getYear() ? String.valueOf(newTask.getDate().getYear()) : " ";
+        String dayOfMonth = String.valueOf(newTask.getDate().getDayOfMonth());
+        String date = dayOfMonth + "," + month + " " + year;
+        String day = newTask.getDate().equals(LocalDate.now()) ? "Today" : date;
 
-            RadioButton radioButton = new RadioButton();
-            BorderPane borderPane = new BorderPane();
-            Button deleteBtn = new Button("delete");
+        RadioButton radioButton = new RadioButton();
 
+        radioButton.setPadding(new Insets(10,0,0,0));
+        radioButton.setDisable(newTask.isCompleted());
 
-            radioButton.selectedProperty().addListener(new ChangeListener<Boolean>() {
-                @Override
-                public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
-                    if(radioButton.isSelected() && !newTask.isCompleted()){
-                        borderPane.setDisable(true);
-                        radioButton.setSelected(true);
-                        newTask.setCompleted(true);
+        BorderPane borderPane = new BorderPane();
 
-                        taskDao.updateCompletedCol(newTask);
+        borderPane.setDisable(newTask.isCompleted());
+        borderPane.setId(newTask.isCompleted() ? "completedTask" : "taskRow");
+        borderPane.setPrefHeight(40);
 
-                        listView.getItems().remove(borderPane);
-                        completedListView.getItems().add(borderPane);
-                        completedListView.setVisible(true);
+        //Complete radio button
+        radioButton.selectedProperty().addListener(new ChangeListener<Boolean>() {
+            @Override
+            public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
+                if(radioButton.isSelected() && !newTask.isCompleted()){
 
-                    }
+                    borderPane.setDisable(true);
+                    borderPane.setId("completedTask");
+
+                    newTask.setCompleted(true);
+
+                    TaskDao.updateCompletedCol(newTask);
+
+                    listView.getItems().remove(borderPane);
+                    completedListView.getItems().add(borderPane);
+                    completedListView.setVisible(true);
                 }
-            });
+            }
+        });
 
-            EventHandler<ActionEvent> event = new EventHandler<ActionEvent>() {
-                 public void handle(ActionEvent e)
-                 {
-                     listView.getItems().remove(borderPane);
-                     taskDao.deleteTask(newTask);
-                  }
-                };
-            deleteBtn.setOnAction(event);
-            borderPane.setDisable(newTask.getType().equals("completed"));
-            radioButton.setSelected(newTask.getType().equals("completed"));
+        EventHandler<ActionEvent> event = new EventHandler<ActionEvent>() {
+            public void handle(ActionEvent e) {
+                Optional<ButtonType> result = Alerts.deleteAlert(dialogStage,"delete task").showAndWait();
+                if(result.orElse(ButtonType.CANCEL) == ButtonType.OK){
 
-            Label label = new Label(newTask.getTitle());
+                    listView.getItems().remove(borderPane);
+                    completedListView.getItems().remove(borderPane);
+                    TaskDao.deleteTask(newTask.getTitle());
+                }
+            }
+        };
 
-            String month = firstLetterUpper(newTask.getDate().getMonth().toString());
-            String year = newTask.getDate().getYear() > LocalDate.now().getYear() ? String.valueOf(newTask.getDate().getYear()) : " ";
-            String dayOfMonth = String.valueOf(newTask.getDate().getDayOfMonth());
-            String date = dayOfMonth + "," + month + " " + year;
-            String day = newTask.getDate().equals(LocalDate.now()) ? "Today" : date;
+        Button deleteBtn = new Button("delete");
+        deleteBtn.setId("deleteBtn");
 
-            Label label1 = new Label(day);
+        Label taskTitle = new Label(newTask.getTitle());
+        taskTitle.setTextFill(Color.web("#ffffff"));
 
+        Label taskDate = new Label(day);
+        taskDate.setId("taskDate");
 
-            label1.setStyle("-fx-font-size : 10px");
-            label.setTextFill(Color.web("#000000"));
-            label1.setTextFill(Color.web("#B73A52"));
+        VBox vBox = new VBox(taskTitle,taskDate);
+        vBox.setPadding(new Insets(5,0,0,20));
 
-            VBox vBox = new VBox(label,label1);
+        borderPane.setLeft(radioButton);
+        borderPane.setCenter(vBox);
+        borderPane.setRight(deleteBtn);
 
-            vBox.setPadding(new Insets(0,0,0,20));
-            borderPane.setPadding(new Insets(2,0,0,10));
-            borderPane.setBackground(new Background(new BackgroundFill(javafx.scene.paint.Color.web("#ffffff"), CornerRadii.EMPTY, Insets.EMPTY)));
+        return borderPane;
+    }
 
-            borderPane.setLeft(radioButton);
-            borderPane.setCenter(vBox);
-            borderPane.setRight(deleteBtn);
+    public static String dateConverter( LocalDate date){
+        String dayOfWeek = date.getDayOfWeek().toString();
+        String month = date.getMonth().toString();
+        int dayOfMonth = date.getDayOfMonth();
+        return (TaskPagesService.firstLetterUpper(dayOfWeek) + "," + TaskPagesService.firstLetterUpper(month) + " " + String.valueOf(dayOfMonth));
+    }
 
-            return borderPane;
-         }
-
-
-    public String firstLetterUpper(String s){
+    public static String firstLetterUpper(String s){
             return s.charAt(0) + s.substring(1).toLowerCase();
         }
 }
