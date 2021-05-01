@@ -7,12 +7,12 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import sample.Main;
+import sample.java.dao.ChallengesDao;
 import sample.java.model.Challenge;
 import sample.java.service.ChallengePageService;
 import sample.java.service.Validations;
 
 public class ChallengePageController {
-
 
     public Main main;
     public Stage dialogStage;
@@ -26,24 +26,13 @@ public class ChallengePageController {
     @FXML
     private TextField challengeTitleField;
 
-    @FXML
-    void initialize(){
-
-
-    }
     //set Main
     public void setMain(Main main){
 
         this.main = main;
         main.getChallengeList().clear();
-        main.getChallengesData()
-                .filtered(challenge -> challenge.getType()
-                        .equals("active"))
-                .forEach(challenge -> main.getChallengeList()
-                        .add(service.maker(
-                                challenge ,
-                                challengesList
-                        )));
+        main.getChallengesData().forEach(challenge -> main.getChallengeList().add(service.maker(challenge , challengesList, this.main)));
+
         challengesList.setItems(main.getChallengeList());
         main.checkChallenge();
     }
@@ -57,17 +46,15 @@ public class ChallengePageController {
     @FXML
     void handleAddBtn(ActionEvent event ) {
 
-        if(validations.isInputValidChallengesPage(challengeTitleField)){
-
+        if(validations.challengePage(challengeTitleField)){
             Challenge newChallenge = new Challenge();
             Boolean okClicked = main.showNewChallengeDialog(newChallenge , challengeTitleField.getText());
 
             if (okClicked){
                 main.getChallengesData().add(newChallenge);
-                main.getChallengeList().add(service.maker(newChallenge,challengesList));
+                main.getChallengeList().add(service.maker(newChallenge, challengesList, this.main));
+                ChallengesDao.writeChallenge(newChallenge);
             }
         }
-        System.out.print( challengeTitleField.getText() + main.getTasksData().filtered(task -> task.getType().equals("challenge") && task.getTitle().equals(challengeTitleField.getText()) && task.isCompleted()).size() + "\n");
-
     }
 }

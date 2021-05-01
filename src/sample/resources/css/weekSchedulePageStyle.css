@@ -1,8 +1,7 @@
 .list-cell {
-    -fx-control-inner-background: white;
-      -fx-background-color: -fx-box-border, white;
+    -fx-control-inner-background: #111d27;
+      -fx-background-color: -fx-box-border, #111d27;
       -fx-background-insets: 0;
-      -fx-text-fill: #326B70;
       -fx-padding: 5,0,5,0;
 }
 .list-view, .split-pane {

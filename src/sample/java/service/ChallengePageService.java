@@ -9,51 +9,71 @@ import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.CornerRadii;
 import javafx.stage.Stage;
+import sample.Main;
+import sample.java.dao.ChallengesDao;
+import sample.java.dao.TaskDao;
 import sample.java.model.Challenge;
 
-
+import java.time.LocalDate;
+import java.util.Optional;
 
 public class ChallengePageService {
 
     public Stage dialogStage;
+    public Main main;
 
     ListView<BorderPane> listView;
-    public BorderPane maker(Challenge newChallenge , ListView<BorderPane> challengesList) {
+    public BorderPane maker(Challenge challenge , ListView<BorderPane> challengesList , Main main) {
 
         this.listView = challengesList;
-        TitledPane titledPane = new TitledPane();
-        BorderPane borderPane = new BorderPane();
+        this.main = main;
+
         BorderPane rootPane = new BorderPane();
+        rootPane.setId("challengeRow");
 
-        Button delete = new Button("Delete");
-
-        Label label = new Label(newChallenge.getDescription());
-        Label label1 = new Label(newChallenge.getTitle());
-        titledPane.setText(newChallenge.getTitle());
-
-        rootPane.setBackground(new Background(new BackgroundFill(javafx.scene.paint.Color.web("#ffffff"), CornerRadii.EMPTY, Insets.EMPTY)));
-        delete.setStyle("-fx-background-color : null;" +
-                "-fx-text-fill : red");
-
+        Label description = new Label(challenge.getDescription());
+        Label title = new Label(challenge.getTitle());
+        Label endDate = new Label("Finish Date:" + LocalDate.now().plusDays(challenge.getDuration()).toString());
+        Label startedDate = new Label("Started Date:" +  challenge.getStartedDate().toString());
 
 //delete button event
         EventHandler<ActionEvent> event = new EventHandler<ActionEvent>() {
             public void handle(ActionEvent e)
             {
-                listView.getItems().remove(rootPane);
+                Optional<ButtonType> result = Alerts.deleteAlert(dialogStage,"delete" + challenge.getTitle()).showAndWait();
+                if (result.orElse(ButtonType.CANCEL) == ButtonType.OK){
+
+                    ChallengesDao.deleteChallenge(challenge);
+                    TaskDao.deleteTask(challenge.getTitle());
+                    main.getTasksData().removeIf(task -> task.getTitle().equals(challenge.getTitle()));
+
+                    listView.getItems().remove(rootPane);
+                    main.getChallengesData().remove(challenge);
+                }
             }
         };
 
+        //Delete button
+        Button delete = new Button("delete");
+        delete.setId("deleteBtn");
         delete.setOnAction(event);
 
-        borderPane.setLeft(label1);
-        borderPane.setCenter(label);
+        //Challenge card context
+        BorderPane cardContext = new BorderPane();
 
-        titledPane.setContent(borderPane);
-        titledPane.setExpanded(false);
+        cardContext.setLeft(startedDate);
+        cardContext.setCenter(description);
+        cardContext.setRight(endDate);
+
+        //Challenge card
+        TitledPane challengeCard = new TitledPane();
+        challengeCard.setText(challenge.getTitle());
+        challengeCard.setContent(cardContext);
+        challengeCard.setExpanded(false);
+        challengeCard.setPrefHeight(40);
 
         rootPane.setRight(delete);
-        rootPane.setCenter(titledPane);
+        rootPane.setCenter(challengeCard);
 
         return rootPane;
     }

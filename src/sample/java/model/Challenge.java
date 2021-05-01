@@ -10,17 +10,19 @@ public class Challenge {
     final ObjectProperty<LocalDate> startedDate;
     final IntegerProperty duration;
     final StringProperty type;
+    final BooleanProperty completed;
 
     //Default constructor
-    public Challenge(){ this(null,null,null,0,null); }
+    public Challenge(){ this(null,null,null,0,null, false); }
 
     //Parameter constructor
-    public Challenge(String title ,String description , LocalDate startedDate , int duration ,String type) {
+    public Challenge(String title, String description, LocalDate startedDate, int duration, String type, boolean completed) {
         this.title = new SimpleStringProperty(title);
         this.description = new SimpleStringProperty(description);
         this.startedDate = new SimpleObjectProperty<>(startedDate);
         this.duration = new SimpleIntegerProperty(duration);
         this.type = new SimpleStringProperty(type);
+        this.completed = new SimpleBooleanProperty(completed);
     }
 
     public String getType() { return type.get(); }
@@ -50,6 +52,12 @@ public class Challenge {
     public String getTitle() { return title.get(); }
 
     public StringProperty titleProperty() { return title; }
+
+    public boolean isCompleted() { return completed.get(); }
+
+    public BooleanProperty completedProperty() { return completed; }
+
+    public void setCompleted(boolean completed) { this.completed.set(completed); }
 
     public void setTitle(String title) { this.title.set(title); }
 }

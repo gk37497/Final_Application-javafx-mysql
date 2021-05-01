@@ -5,7 +5,7 @@ import javafx.stage.Stage;
 
 public class Alerts {
 
-    public void validAlert(Stage dialogStage , String errMessage){
+    public static void validAlert(Stage dialogStage , String errMessage){
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.initOwner(dialogStage);
         alert.setTitle("Invalid Fields");
@@ -13,6 +13,14 @@ public class Alerts {
         alert.setContentText(errMessage);
 
         alert.showAndWait();
+    }
+    public static Alert deleteAlert(Stage dialogStage, String errMessage){
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.initOwner(dialogStage);
+        alert.setTitle("Confirm to delete");
+        alert.setHeaderText("Are you sure?");
+        alert.setContentText(errMessage);
+        return alert;
     }
 
 }

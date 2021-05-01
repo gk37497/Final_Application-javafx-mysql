@@ -7,12 +7,13 @@ import sample.java.model.Task;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class taskDao {
+public class TaskDao {
 
     //Бүх таскыг өгөгдлийн сангаас дуудах
-    public static ObservableList<Task> getEmployeeList() throws SQLException, ClassNotFoundException {
+    public static ObservableList<Task> getTasksList() throws SQLException{
 
         String selectStmt = "SELECT * FROM tasks";
+
         ResultSet rs = DbConnection.dbExecuteQuery(selectStmt);
         ObservableList<Task> tasksList = FXCollections.observableArrayList();
 
@@ -55,10 +56,10 @@ public class taskDao {
     }
 
     //Таск устгах
-    public static void deleteTask(Task task){
+    public static void deleteTask(String title){
         String deleteStmt =
                 "DELETE FROM tasks\n" +
-                "WHERE title = '"+ task.getTitle()+"'\n";
+                "WHERE title LIKE '"+ title +"%'\n";
 
         try{
             DbConnection.dbExecuteUpdate(deleteStmt);

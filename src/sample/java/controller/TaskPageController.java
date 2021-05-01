@@ -8,7 +8,9 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
 import sample.Main;
+import sample.java.dao.TaskDao;
 import sample.java.model.Task;
+import sample.java.service.FilteredLists;
 import sample.java.service.TaskPagesService;
 import sample.java.service.Validations;
 
@@ -45,8 +47,8 @@ public class TaskPageController {
         main.getTasksList().clear();
         main.getCompletedTasks().clear();
 
-        main.getTasksData().filtered(task ->!task.isCompleted()).forEach(e->main.getTasksList().add(service.Maker(e , tasksList, completedList)));
-        main.getTasksData().filtered(Task::isCompleted).forEach(e->main.getCompletedTasks().add(service.Maker(e,tasksList,completedList)));
+        FilteredLists.tasks(this.main).forEach(e->main.getTasksList().add(service.maker(e , tasksList, completedList)));
+        FilteredLists.completedTasks(this.main).forEach(e->main.getCompletedTasks().add(service.maker(e,tasksList,completedList)));
 
         tasksList.setItems(main.getTasksList());
         completedList.setItems(main.getCompletedTasks());
@@ -59,13 +61,16 @@ public class TaskPageController {
     //handle add button
     public void handleBtn(){
 
-        if (validations.isInputValidTasksPage(taskTitleField , datePicker)) {
+        if (validations.taskPage(taskTitleField , datePicker)) {
+
             String title =  taskTitleField.getText();
             LocalDate date = datePicker.getValue();
 
             Task newTask = new Task(title, "task" , false, date);
             main.getTasksData().add(newTask);
-            main.getTasksList().add(service.Maker(newTask , tasksList , completedList));
+            main.getTasksList().add(service.maker(newTask , tasksList , completedList));
+
+            TaskDao.writeTask(newTask);
         }
 
         taskTitleField.setText("");

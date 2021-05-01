@@ -10,8 +10,11 @@ import javafx.scene.layout.*;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import sample.java.controller.*;
+import sample.java.dao.ChallengesDao;
+import sample.java.dao.TaskDao;
 import sample.java.model.Challenge;
 import sample.java.model.Task;
+import sample.java.service.FilteredLists;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -28,23 +31,16 @@ public class Main extends Application {
     private final ObservableList<Task> tasksData =  FXCollections.observableArrayList();
     private final ObservableList<Challenge> challengesData = FXCollections.observableArrayList();
 
-    //display panes lists
+    //display pane lists
     private final ObservableList<BorderPane> tasksList = FXCollections.observableArrayList();
     private final ObservableList<BorderPane> completedTasks = FXCollections.observableArrayList();
     private final ObservableList<BorderPane> challengeList = FXCollections.observableArrayList();
 
-    private final ObservableList<Integer> numbers = FXCollections.observableArrayList();
 
+    public Main() throws SQLException, ClassNotFoundException {
 
-    public Main(){
-//
-//        challengesData.add((new Challenge("wake up early" , "just be happy" ,LocalDate.now(),3,"active")));
-//        challengesData.add((new Challenge("running daily" , "just be happy" ,LocalDate.now(),4,"active")));
-//        challengesData.add((new Challenge("no beer" , "just be happy" ,LocalDate.now(),2,"active")));
-
-        numbers.add(getTasksData().size());
-        numbers.add(getCompletedTasks().size());
-        numbers.add(getTasksData().size());
+        getTasksData().addAll(TaskDao.getTasksList());
+        getChallengesData().addAll(ChallengesDao.getChallengesList());
     }
 
     public ObservableList<BorderPane> getCompletedTasks() { return completedTasks; }
@@ -59,8 +55,6 @@ public class Main extends Application {
         checkChallenge();
         return challengesData;
     }
-
-    public ObservableList<Integer> getNumbers() { return numbers; }
 
     public void checkChallenge(){
         challengesData.removeIf(challenge -> challenge.getType().equals("deleted"));
@@ -146,12 +140,13 @@ public class Main extends Application {
         try {
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(Main.class.getResource("resources/view/ChallengePage.fxml"));
-            BorderPane taskPage = (BorderPane) loader.load();
+            BorderPane challengePage = (BorderPane) loader.load();
 
             ChallengePageController controller = loader.getController();
             controller.setMain(this);
             controller.setDialogStage(primaryStage);
-            rootLayout.setCenter(taskPage);
+            rootLayout.setCenter(challengePage);
+
         }catch (IOException e){
             e.printStackTrace();
         }
@@ -212,6 +207,8 @@ public class Main extends Application {
             NewChallengeDialogController controller = loader.getController();
             controller.setStage(dialogStage);
             controller.setChallenge(newChallenge,title);
+            controller.setMain(this);
+
             // Show the dialog and wait until the user closes it
             dialogStage.showAndWait();
             return controller.isOkClicked();

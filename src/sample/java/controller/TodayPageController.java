@@ -6,8 +6,9 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.*;
 import sample.Main;
-import sample.java.dao.taskDao;
+import sample.java.dao.TaskDao;
 import sample.java.model.Task;
+import sample.java.service.FilteredLists;
 import sample.java.service.TaskPagesService;
 import sample.java.service.Validations;
 
@@ -26,7 +27,7 @@ public class TodayPageController {
     private Label subTitle;
 
     @FXML
-    private TextField todayTaskField;
+    private TextField addTaskField;
 
     @FXML
     private ListView<BorderPane> completedList;
@@ -38,24 +39,21 @@ public class TodayPageController {
 //initialize
     @FXML
     void initialize(){
-
-        String dayOfWeek = LocalDate.now().getDayOfWeek().toString();
-        String month = LocalDate.now().getMonth().toString();
-        int dayOfMonth = LocalDate.now().getDayOfMonth();
-        subTitle.setText(service.firstLetterUpper(dayOfWeek) + "," + service.firstLetterUpper(month) + " " + String.valueOf(dayOfMonth));
-
+        subTitle.setText(TaskPagesService.dateConverter(LocalDate.now()));
     }
 
 //set Main
     public void setMain(Main main){
         this.main = main;
-        completedLabel.setVisible(main.getCompletedTasks().size() > 0);
-        completedList.setVisible(main.getCompletedTasks().size() > 0);
 
         main.getTasksList().clear();
         main.getCompletedTasks().clear();
-        main.getTasksData().stream().filter(task -> !task.isCompleted() && task.getDate().equals(LocalDate.now())).forEach(e->main.getTasksList().add(service.Maker(e,tasksList,completedList)));
-        main.getTasksData().stream().filter(task -> task.isCompleted() && task.getDate().equals(LocalDate.now())).forEach(e->main.getCompletedTasks().add(service.Maker(e,tasksList,completedList)));
+
+        FilteredLists.todayTasks(this.main).forEach(e->main.getTasksList().add(service.maker(e,tasksList,completedList)));
+        FilteredLists.todayCompletedTasks(this.main).forEach(e->main.getCompletedTasks().add(service.maker(e,tasksList,completedList)));
+
+        completedLabel.setVisible(main.getCompletedTasks().size() > 0);
+        completedList.setVisible(main.getCompletedTasks().size() > 0);
 
         tasksList.setItems(main.getTasksList());
         completedList.setItems(main.getCompletedTasks());
@@ -65,22 +63,16 @@ public class TodayPageController {
 //Handle Add button
     public void handleBtn(){
 
-        if (validations.isInputValidTodayPage(todayTaskField)){
-        String title = todayTaskField.getText();
+        if (validations.todayPage(addTaskField)){
+        String title = addTaskField.getText();
         LocalDate date = LocalDate.now();
 
         Task newTask = new Task(title,"task" , false ,date);
         main.getTasksData().add(newTask);
-        main.getTasksList().add(service.Maker(newTask , tasksList,completedList));
+        main.getTasksList().add(service.maker(newTask , tasksList,completedList));
 
-        taskDao.writeTask(newTask);
-
-        main.getNumbers().set(0,(main.getNumbers().get(0)+1));
-
-        System.out.println(main.getNumbers().get(0));
+        TaskDao.writeTask(newTask);
         }
-
-        main.getTasksData().forEach(task -> System.out.println(task.isCompleted()));
-        todayTaskField.setText("");
+        addTaskField.setText("");
     }
 }
