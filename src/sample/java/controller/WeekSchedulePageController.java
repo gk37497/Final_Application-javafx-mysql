@@ -6,10 +6,11 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
 import sample.Main;
 import sample.java.model.Quotes;
+import sample.java.model.Task;
 import sample.java.service.FilteredLists;
-import sample.java.service.TaskPagesService;
 
 import java.time.LocalDate;
 import java.util.Random;
@@ -27,7 +28,6 @@ public class WeekSchedulePageController {
     @FXML
     private Label thursdayLabel;
 
-
     @FXML
     private Label tuesdayLabel;
 
@@ -42,7 +42,6 @@ public class WeekSchedulePageController {
 
     @FXML
     private Label fridayLabel;
-
 
     @FXML
     private ListView<Label> mondayList;
@@ -98,7 +97,7 @@ public class WeekSchedulePageController {
             }
         }
 
-        weekInterval.setText(dateConverter(monday) + "-" + dateConverter(sunday));
+        weekInterval.setText(dateConverter(monday) + " - " + dateConverter(sunday));
 
         switch (LocalDate.now().getDayOfWeek().toString()){
             case "MONDAY" : mondayLabel.setTextFill(Color.WHITE);
@@ -120,26 +119,31 @@ public class WeekSchedulePageController {
 
     public void scheduleMaker (String dayOfWeek , ListView<Label> dayName){
         ObservableList <Label > dayTasks = FXCollections.observableArrayList();
-        filteredLists.tasksOfThisWeek(main,dayOfWeek).forEach(task -> dayTasks.add(checkCompleted(task.getTitle(),task.isCompleted())));
+        filteredLists.tasksOfDay(main,dayOfWeek).forEach(task -> dayTasks.add(checkTask(task)));
         dayName.setItems(dayTasks);
-
     }
 
-    public Label checkCompleted(String taskTitle,boolean completed){
-        Label label = new Label();
-        label.setText(taskTitle);
-        if (completed) {
-            label.setTextFill(Color.RED);
-        } else {
-            label.setTextFill(Color.BLACK);
+    public Label checkTask(Task task){
+        Label taskTittle = new Label();
+
+        taskTittle.setText(task.getTitle());
+        taskTittle.setFont(new Font(9.0));
+
+        if (task.isCompleted()) {
+            taskTittle.setTextFill(Color.web("#855a99"));
+        }else if(!task.isCompleted() && task.getDate().isBefore(LocalDate.now())){
+            taskTittle.setTextFill(Color.web("#ff751f"));
         }
-        return label;
+        else {
+            taskTittle.setTextFill(Color.web("#f2f2f2"));
+        }
+        return taskTittle;
     }
 
     public static String dateConverter( LocalDate date){
-        String month = date.getMonth().toString();
+        int month = date.getMonthValue();
         int dayOfMonth = date.getDayOfMonth();
-        return (TaskPagesService.firstLetterUpper(month) + " " + String.valueOf(dayOfMonth));
+        return (String.valueOf(month) + " сарын " + String.valueOf(dayOfMonth));
     }
     //set main
     public void setMain(Main main){

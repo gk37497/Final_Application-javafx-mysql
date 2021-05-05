@@ -22,6 +22,7 @@ public class TaskPageController {
     public Stage dialogStage;
     public TaskPagesService service = new TaskPagesService();
     public Validations validations = new Validations();
+    public FilteredLists filteredLists = new FilteredLists();
 
     @FXML
     public ListView<BorderPane> tasksList;
@@ -38,39 +39,43 @@ public class TaskPageController {
     @FXML
     private Label completedLabel;
 
+
     //Set main
     public void setMain(Main main){
-        completedList.setVisible(main.getCompletedTasks().size() > 0);
-        completedLabel.setVisible(main.getCompletedTasks().size() > 0);
-
         this.main = main;
+
         main.getTasksList().clear();
         main.getCompletedTasks().clear();
 
-        FilteredLists.tasks(this.main).forEach(e->main.getTasksList().add(service.maker(e , tasksList, completedList)));
-        FilteredLists.completedTasks(this.main).forEach(e->main.getCompletedTasks().add(service.maker(e,tasksList,completedList)));
+        /* Бүх биелэгдээгүй task-ийг service-ийн maker-ээр дамжуулан borderpane болгож дэлгэцэнд хуруулах. */
+        filteredLists.thisWeekTasks(this.main).filtered(task ->!task.isCompleted()).forEach(e->main.getTasksList().add(service.maker(e , tasksList, completedList, main)));
+
+        /* Бүх биелэгдсэн task-ийг service-ийн maker-ээр дамжуулан borderpane болгож дэлгэцэнд хуруулах. */
+        FilteredLists.completedTasks(this.main).forEach(e->main.getCompletedTasks().add(service.maker(e,tasksList,completedList,main)));
 
         tasksList.setItems(main.getTasksList());
         completedList.setItems(main.getCompletedTasks());
+
+        completedList.setVisible(main.getCompletedTasks().size() > 0);
+        completedLabel.setVisible(main.getCompletedTasks().size() > 0);
     }
     //Set dialog
     public void setDialogStage(Stage dialogStage){
         this.dialogStage = dialogStage;
     }
 
-    //handle add button
+    //Нэмэх товчлуур дарагдах үед
     public void handleBtn(){
 
         if (validations.taskPage(taskTitleField , datePicker)) {
 
             String title =  taskTitleField.getText();
             LocalDate date = datePicker.getValue();
-
             Task newTask = new Task(title, "task" , false, date);
-            main.getTasksData().add(newTask);
-            main.getTasksList().add(service.maker(newTask , tasksList , completedList));
 
-            TaskDao.writeTask(newTask);
+            /* шинэ task-ийг өгөгдлийн сан руу нэмж дэлгэцэнд харуулах. */
+            service.addTask(main,newTask,tasksList,completedList);
+
         }
 
         taskTitleField.setText("");

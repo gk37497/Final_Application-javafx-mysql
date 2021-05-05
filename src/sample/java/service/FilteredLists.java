@@ -2,14 +2,16 @@ package sample.java.service;
 
 import javafx.collections.ObservableList;
 import sample.Main;
+import sample.java.model.Challenge;
 import sample.java.model.Task;
 
 import java.time.LocalDate;
+import java.util.Comparator;
 
 public class FilteredLists {
 
     //Өнөөдрийн биелэгдээгүй таскууд агуулсан лист
-    public static ObservableList<Task> todayTasks(Main main){
+    public static ObservableList<Task> todayUncompletedTasks(Main main){
         return main.getTasksData().filtered(task -> !task.isCompleted() && task.getDate().equals(LocalDate.now()));
     }
 
@@ -18,22 +20,43 @@ public class FilteredLists {
         return main.getTasksData().filtered(task -> task.isCompleted() && task.getDate().equals(LocalDate.now()));
     }
 
-    //Бүх биелэгдээгүй таскууд агуулсан лист
-    public static ObservableList<Task> tasks(Main main){
-        return main.getTasksData().filtered(task -> !task.isCompleted() && task.getType().equals("task"));
-    }
-
     //Бүх биелэгдсэн таскууд агуулсан лист
     public static ObservableList<Task> completedTasks(Main main){
         return main.getTasksData().filtered(Task :: isCompleted);
     }
 
-    //Тухайн 7 хоног дахь таскуудыг ялгаж байна
-    public  ObservableList<Task> tasksOfThisWeek(Main main , String dayOfWeek){
-        ObservableList <Task> intervalDay = main.getTasksData().filtered(this::isDayOfWeek);
-        return intervalDay.filtered(task -> task.getDate().getDayOfWeek().toString().equals(dayOfWeek));
+    //Тухайн 7 хоногын гариг дахь таскуудыг ялгаж байна
+    public ObservableList<Task> tasksOfDay(Main main , String dayOfWeek){
+        ObservableList <Task> thisWeekTasks = main.getTasksData().filtered(this::isDayOfWeek);
+        return thisWeekTasks.filtered(task -> task.getDate().getDayOfWeek().toString().equals(dayOfWeek));
+    }
+    //Өнөөдрийн бүх таск
+    public static  ObservableList<Task> todayTasks(Main main){
+        return main.getTasksData().filtered(task -> task.getDate().equals(LocalDate.now()));
+    }
+    //Энэ 7 хоногийн таскууд
+    public ObservableList<Task> thisWeekTasks(Main main){
+        return main.getTasksData().filtered(task -> task.getDate().getDayOfYear() <= getSunday()
+                && task.getDate().getDayOfYear() >= getMonday())
+                .sorted(Comparator.comparing(Task::getDate));
     }
 
+    //Зорилт биелүүлэгдсэн таскууд
+    public static ObservableList<Task> successTasksOfChallenge(Main main , Challenge challenge){
+        return main.getTasksData().filtered(task -> task.getType().equals("challenge")
+                && task.isCompleted()
+                && task.getTitle().contains(challenge.getTitle()));
+
+    }
+
+    public static ObservableList<Task> unsuccessfulTasksOfChallenge(Main main , Challenge challenge){
+        return main.getTasksData().filtered(task -> task.getType().equals("challenge")
+                && !task.isCompleted()
+                && task.getTitle().contains(challenge.getTitle())
+                && task.getDate().isBefore(LocalDate.now())
+        );
+
+    }
     //Энэ 7 хоногийн Даваа гаригийг олж байна
     public int getMonday(){
         int i = 0;

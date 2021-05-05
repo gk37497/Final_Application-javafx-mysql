@@ -31,10 +31,9 @@ public class ChallengePageController {
 
         this.main = main;
         main.getChallengeList().clear();
-        main.getChallengesData().forEach(challenge -> main.getChallengeList().add(service.maker(challenge , challengesList, this.main)));
+        main.getChallengesData().forEach(challenge -> main.getChallengeList().add(service.challengeRowMaker(challenge , challengesList, this.main)));
 
         challengesList.setItems(main.getChallengeList());
-        main.checkChallenge();
     }
 
     //Set Stage
@@ -52,9 +51,11 @@ public class ChallengePageController {
 
             if (okClicked){
                 main.getChallengesData().add(newChallenge);
-                main.getChallengeList().add(service.maker(newChallenge, challengesList, this.main));
+                main.getChallengeList().add(service.challengeRowMaker(newChallenge, challengesList, this.main));
                 ChallengesDao.writeChallenge(newChallenge);
             }
+
+            challengeTitleField.setText("");
         }
     }
 }

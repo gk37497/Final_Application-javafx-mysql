@@ -1,5 +1,7 @@
 package sample.java.controller;
 
+import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.StringProperty;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
 import javafx.scene.control.Label;
@@ -17,6 +19,7 @@ import sample.java.model.Challenge;
 import sample.java.model.Task;
 import sample.java.service.BackgroundMaker;
 import sample.java.service.Constants;
+import sample.java.service.FilteredLists;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -44,22 +47,13 @@ public class RootLayoutController {
     @FXML
     private AnchorPane dashBoardBtn;
 
-    @FXML
-    private Label numberOfTodayTask;
-
-    @FXML
-    private Label numberOfChallenges;
-
-    @FXML
-    private Label numberOfAllTasks;
 
 //Set main
     public void setMain(Main main) throws SQLException,ClassNotFoundException{
         this.main = main;
-
-        backgroundChanger(constants.getPageNames()[0]);
-        numberOfChallenges.setText(String.valueOf(main.getChallengesData().size()));
+        backgroundChanger(constants.getPageNames()[4]);
     }
+
 
 //Set Stage
     public void setStage(Stage stage){

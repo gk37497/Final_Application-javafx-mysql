@@ -14,12 +14,12 @@
          <children>
             <AnchorPane layoutX="14.0" layoutY="1.0" prefHeight="57.0" prefWidth="184.0">
                <children>
-                  <Label layoutX="2.0" layoutY="5.0" prefHeight="15.0" prefWidth="176.0" text="Today" textFill="#f8f5f5">
+                  <Label layoutX="2.0" layoutY="5.0" prefHeight="15.0" prefWidth="176.0" text="Өнөөдөр" textFill="WHITE">
                      <font>
                         <Font size="30.0" />
                      </font>
                   </Label>
-                  <Label fx:id="subTitle" layoutX="8.0" layoutY="41.0" prefHeight="17.0" prefWidth="176.0" textFill="#f5f2f2" />
+                  <Label fx:id="subTitle" layoutX="8.0" layoutY="41.0" prefHeight="17.0" prefWidth="176.0" textFill="WHITE" />
                </children>
             </AnchorPane>
          </children>
@@ -28,8 +28,8 @@
    <bottom>
       <AnchorPane prefHeight="50.0" prefWidth="600.0" BorderPane.alignment="CENTER">
          <children>
-            <TextField fx:id="addTaskField" layoutX="126.0" layoutY="12.0" promptText="Add Task" style="-fx-background-color: #111d27;" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="5.0" />
-            <Button defaultButton="true" layoutX="615.0" layoutY="9.0" mnemonicParsing="false" onAction="#handleBtn" prefHeight="27.0" prefWidth="55.0" style="-fx-background-color: #2b6B89;" text="Add" textFill="#fffbfb" AnchorPane.rightAnchor="30.0" />
+            <TextField fx:id="addTaskField" layoutX="126.0" layoutY="12.0" promptText="Ажил нэмэх" style="-fx-background-color: #111d27;" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="5.0" />
+            <Button defaultButton="true" layoutX="615.0" layoutY="9.0" mnemonicParsing="false" onAction="#handleBtn" prefHeight="27.0" prefWidth="67.0" style="-fx-background-color: #2b6B89;" text="Нэмэх" textFill="WHITE" AnchorPane.rightAnchor="30.0" />
          </children>
       </AnchorPane>
    </bottom>
@@ -38,7 +38,7 @@
          <children>
             <ListView fx:id="tasksList" layoutX="211.0" layoutY="81.0" prefHeight="294.0" prefWidth="660.0" style="-fx-background-color: null;" AnchorPane.bottomAnchor="192.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="10.0" />
             <ListView fx:id="completedList" layoutX="20.0" layoutY="327.0" prefHeight="160.0" prefWidth="660.0" style="-fx-background-color: null;" AnchorPane.bottomAnchor="9.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="327.0" />
-            <Label fx:id="completedLabel" layoutX="22.0" layoutY="307.0" text="Completed" textFill="#e4e1e1" underline="true" />
+            <Label fx:id="completedLabel" layoutX="22.0" layoutY="307.0" opacity="0.63" text="Биелэгдсэн" textFill="WHITE" underline="true" />
          </children>
       </AnchorPane>
    </center>

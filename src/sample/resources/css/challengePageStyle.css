@@ -10,7 +10,7 @@
     -fx-control-inner-background: #635A6F;
       -fx-background-color: -fx-box-border, #635A6F;
       -fx-background-insets: 0;
-      -fx-padding: 0;
+      -fx-padding: 2;
 }
 .list-view, .split-pane {
        -fx-background-insets: 0;
@@ -25,6 +25,9 @@
     -fx-background-color:#111d27;
     -fx-text-fill:#B73A52;
     -fx-padding:10px;
+}
+#challengeTitleField{
+    -fx-text-fill:white;
 }
 
 .titled-pane > .title

@@ -11,14 +11,14 @@ public class Validations {
 
     public Stage dialogStage;
 
-//Таск хуудасны баталгаажуулалт
-    public  Boolean taskPage(TextField taskTitleField , DatePicker datePicker){
+///Таск хуудасны баталгаажуулалт
+    public  Boolean taskPage(TextField taskTitleField , DatePicker datePicker) throws NullPointerException{
         String errorMessage = "";
 
         if (taskTitleField.getText().isEmpty())
-            errorMessage = "No valid Task title !!!";
+            errorMessage = "Таскын гарчиг хоосон байна";
         if (datePicker.getValue() == null && datePicker.getValue().isAfter(LocalDate.now()))
-            errorMessage = errorMessage + " No valid Task Date !!!";
+            errorMessage = errorMessage + "Он сар өдөр оруулаагүй байна";
         if (errorMessage.length() == 0)
             return true;
         else{
@@ -26,12 +26,12 @@ public class Validations {
             return false;
         }
     }
-    //Today хуудасны баталгаажуулалт
+///Today хуудасны баталгаажуулалт
     public Boolean todayPage(TextField taskTitleField){
         String errorMessage = "";
 
         if (taskTitleField.getText().isEmpty())
-            errorMessage = "No valid Task title !!!";
+            errorMessage = "Таскын гарчиг хоосон байна";
         if (errorMessage.length() == 0)
             return true;
         else{
@@ -40,12 +40,12 @@ public class Validations {
         }
     }
 
-    //Challenge хуудасны баталгаажуулалт
+///Challenge хуудасны баталгаажуулалт
     public Boolean challengePage(TextField taskTitleField){
         String errorMessage = "";
 
         if (taskTitleField.getText().isEmpty())
-            errorMessage = "No valid Challenge title !!!";
+            errorMessage = "Зорилтын гарчиг хоосон байна";
         if (errorMessage.length() == 0)
             return true;
         else{
@@ -54,26 +54,26 @@ public class Validations {
         }
     }
 
-    //New Challenge хуудасны баталгаажуулалт
+///New Challenge хуудасны баталгаажуулалт
     public Boolean newChallengeDialog(DatePicker startDatePicker , TextArea challengeDesc , TextField durationField) throws NullPointerException{
         String errMessage = "";
 
         if (startDatePicker.getValue() == null && startDatePicker.getValue().getDayOfYear() <= LocalDate.now().getDayOfYear())
-            errMessage = "No valid Start date!\n";
+            errMessage = "Эхлэх өдөр хоосон байна!\n";
 
         if (challengeDesc.getText().isEmpty())
-            errMessage +="No valid Description !\n";
+            errMessage +="Тайлбар байхгүй байна!\n";
 
         if (durationField.getText().isEmpty())
-            errMessage +="No valid Duration!\n";
+            errMessage +="Үргэлжлэх хугацаа оруулаагүй байна\n";
 
         else{
             try {
                 if(Integer.parseInt(durationField.getText()) <= 0){
-                    errMessage += "Duration day is not equal = 0\n";
+                    errMessage += "Үргэлжлэх хугацаа 0 байж болохгүй\n";
                 }
             } catch (NumberFormatException e) {
-                errMessage += "No valid Duration (must be an integer)!\n";
+                errMessage += "Үргэлжлэх хугацаа тоо байх ёстой!\n";
             }
         }
 

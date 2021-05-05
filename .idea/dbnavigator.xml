@@ -26,7 +26,7 @@
     <show-object-properties value="true" />
     <loaded-nodes>
       <connection connection-id="37d95e5f-8cdb-44c0-9d20-2bc573494129">
-        <schema name="FinalProject" object-types="view, function, table, column" />
+        <schema name="FinalProject" object-types="function, view, column, table" />
       </connection>
     </loaded-nodes>
   </component>
@@ -42,7 +42,7 @@ set completed = 0
 where title = 'new Challenge' and `date` = 'May 1, 2021, 12:00:00 AM'
 
 delete from tasks
-where title like 'dahiad neg harii%']]></console>
+where title = '4434rr']]></console>
     </connection>
   </component>
   <component name="DBNavigator.Project.DatabaseFileManager">

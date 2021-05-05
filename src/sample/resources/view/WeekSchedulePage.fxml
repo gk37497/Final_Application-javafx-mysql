@@ -8,13 +8,14 @@
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
 <BorderPane prefHeight="605.0" prefWidth="700.0" style="-fx-background-color: #326B70;" stylesheets="@../css/weekSchedulePageStyle.css" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.java.controller.WeekSchedulePageController">
    <top>
       <AnchorPane prefHeight="50.0" prefWidth="600.0" BorderPane.alignment="CENTER">
          <children>
-            <Label layoutX="31.0" layoutY="12.0" prefHeight="38.0" prefWidth="211.0" text="Week Schedule" textFill="#f8f5f5" AnchorPane.leftAnchor="20.0">
+            <Label layoutX="31.0" layoutY="12.0" prefHeight="38.0" prefWidth="353.0" text="Долоо хоногийн хуваарь" textFill="#111d27" AnchorPane.leftAnchor="20.0">
                <font>
                   <Font size="30.0" />
                </font>
@@ -23,7 +24,15 @@
       </AnchorPane>
    </top>
    <bottom>
-      <AnchorPane prefHeight="50.0" prefWidth="600.0" BorderPane.alignment="CENTER" />
+      <AnchorPane prefHeight="50.0" prefWidth="600.0" BorderPane.alignment="CENTER">
+         <children>
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#855a99" height="26.0" layoutX="46.0" layoutY="-2.0" stroke="BLACK" strokeType="INSIDE" width="27.0" />
+            <Label layoutX="82.0" layoutY="3.0" prefHeight="17.0" prefWidth="106.0" text="Биелэгдсэн" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ff751f" height="26.0" layoutX="213.0" layoutY="-2.0" stroke="BLACK" strokeType="INSIDE" width="27.0" />
+            <Label layoutX="251.0" layoutY="2.0" prefHeight="17.0" prefWidth="126.0" text="Хугацаа хэтэрсэн" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#f2f2f2" height="26.0" layoutX="396.0" layoutY="-2.0" stroke="BLACK" strokeType="INSIDE" width="27.0" />
+            <Label layoutX="433.0" layoutY="2.0" prefHeight="17.0" prefWidth="126.0" text="Идэвхитэй байгаа" />
+         </children></AnchorPane>
    </bottom>
    <center>
       <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
@@ -42,7 +51,7 @@
                <children>
                   <BorderPane prefHeight="230.0" prefWidth="200.0">
                      <top>
-                        <Label fx:id="mondayLabel" alignment="CENTER" prefHeight="26.0" prefWidth="200.0" style="-fx-background-color: #111d27;" text="Monday" textAlignment="CENTER" textFill="#326b70" BorderPane.alignment="CENTER">
+                        <Label fx:id="mondayLabel" alignment="CENTER" prefHeight="26.0" prefWidth="200.0" style="-fx-background-color: #111d27;" text="Даваа" textAlignment="CENTER" textFill="#326b70" BorderPane.alignment="CENTER">
                            <font>
                               <Font name="System Bold" size="15.0" />
                            </font>
@@ -61,7 +70,7 @@
                   </BorderPane>
                   <BorderPane layoutX="10.0" layoutY="10.0" prefHeight="230.0" prefWidth="200.0" GridPane.columnIndex="3">
                      <top>
-                        <Label fx:id="thursdayLabel" alignment="CENTER" prefHeight="26.0" prefWidth="200.0" style="-fx-background-color: #111d27;" text="Thursday" textAlignment="CENTER" textFill="#326b70" BorderPane.alignment="CENTER">
+                        <Label fx:id="thursdayLabel" alignment="CENTER" prefHeight="26.0" prefWidth="200.0" style="-fx-background-color: #111d27;" text="Пүрэв" textAlignment="CENTER" textFill="#326b70" BorderPane.alignment="CENTER">
                            <font>
                               <Font name="System Bold" size="15.0" />
                            </font>
@@ -80,7 +89,7 @@
                   </BorderPane>
                   <BorderPane layoutX="10.0" layoutY="10.0" prefHeight="230.0" prefWidth="200.0" GridPane.columnIndex="1">
                      <top>
-                        <Label fx:id="tuesdayLabel" alignment="CENTER" prefHeight="26.0" prefWidth="200.0" style="-fx-background-color: #111d27;" text="Tuesday" textAlignment="CENTER" textFill="#326b70" BorderPane.alignment="CENTER">
+                        <Label fx:id="tuesdayLabel" alignment="CENTER" prefHeight="26.0" prefWidth="200.0" style="-fx-background-color: #111d27;" text="Мягмар" textAlignment="CENTER" textFill="#326b70" BorderPane.alignment="CENTER">
                            <font>
                               <Font name="System Bold" size="15.0" />
                            </font>
@@ -99,7 +108,7 @@
                   </BorderPane>
                   <BorderPane layoutX="10.0" layoutY="10.0" prefHeight="230.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
                      <top>
-                        <Label fx:id="saturdayLabel" alignment="CENTER" prefHeight="26.0" prefWidth="200.0" style="-fx-background-color: #111d27;" text="Saturday" textAlignment="CENTER" textFill="#326b70" BorderPane.alignment="CENTER">
+                        <Label fx:id="saturdayLabel" alignment="CENTER" prefHeight="26.0" prefWidth="200.0" style="-fx-background-color: #111d27;" text="Бямба" textAlignment="CENTER" textFill="#326b70" BorderPane.alignment="CENTER">
                            <font>
                               <Font name="System Bold" size="15.0" />
                            </font>
@@ -118,7 +127,7 @@
                   </BorderPane>
                   <BorderPane layoutX="10.0" layoutY="10.0" prefHeight="230.0" prefWidth="200.0" GridPane.columnIndex="2">
                      <top>
-                        <Label fx:id="wednesdayLabel" alignment="CENTER" prefHeight="26.0" prefWidth="200.0" style="-fx-background-color: #111d27;" text="Wednesday" textAlignment="CENTER" textFill="#326b70" BorderPane.alignment="CENTER">
+                        <Label fx:id="wednesdayLabel" alignment="CENTER" prefHeight="26.0" prefWidth="200.0" style="-fx-background-color: #111d27;" text="Лхагва" textAlignment="CENTER" textFill="#326b70" BorderPane.alignment="CENTER">
                            <font>
                               <Font name="System Bold" size="15.0" />
                            </font>
@@ -137,7 +146,7 @@
                   </BorderPane>
                   <BorderPane layoutX="10.0" layoutY="10.0" prefHeight="230.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="1">
                      <top>
-                        <Label fx:id="sundayLabel" alignment="CENTER" prefHeight="26.0" prefWidth="200.0" style="-fx-background-color: #111d27;" text="Sunday" textAlignment="CENTER" textFill="#326b70" BorderPane.alignment="CENTER">
+                        <Label fx:id="sundayLabel" alignment="CENTER" prefHeight="26.0" prefWidth="200.0" style="-fx-background-color: #111d27;" text="Ням" textAlignment="CENTER" textFill="#326b70" BorderPane.alignment="CENTER">
                            <font>
                               <Font name="System Bold" size="15.0" />
                            </font>
@@ -156,7 +165,7 @@
                   </BorderPane>
                   <BorderPane layoutX="165.0" layoutY="10.0" prefHeight="230.0" prefWidth="200.0" GridPane.rowIndex="1">
                      <top>
-                        <Label fx:id="fridayLabel" alignment="CENTER" prefHeight="26.0" prefWidth="200.0" style="-fx-background-color: #111d27;" text="Friday" textAlignment="CENTER" textFill="#326b70" BorderPane.alignment="CENTER">
+                        <Label fx:id="fridayLabel" alignment="CENTER" prefHeight="26.0" prefWidth="200.0" style="-fx-background-color: #111d27;" text="Баасан" textAlignment="CENTER" textFill="#326b70" BorderPane.alignment="CENTER">
                            <font>
                               <Font name="System Bold" size="15.0" />
                            </font>
@@ -175,7 +184,7 @@
                   </BorderPane>
                   <BorderPane layoutX="475.0" layoutY="10.0" prefHeight="230.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.rowIndex="1">
                      <top>
-                        <Label alignment="CENTER" prefHeight="26.0" prefWidth="200.0" style="-fx-background-color: #111d27;" text="Notes" textAlignment="CENTER" textFill="#326b70" BorderPane.alignment="CENTER">
+                        <Label alignment="CENTER" prefHeight="26.0" prefWidth="200.0" style="-fx-background-color: #111d27;" text="Урмын үг" textAlignment="CENTER" textFill="#326b70" BorderPane.alignment="CENTER">
                            <font>
                               <Font name="System Bold" size="15.0" />
                            </font>
@@ -187,9 +196,9 @@
                      <center>
                         <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
                            <children>
-                              <Label fx:id="mottoText" alignment="CENTER" contentDisplay="CENTER" graphicTextGap="2.0" layoutX="55.0" layoutY="59.0" textAlignment="CENTER" textFill="#fcfafa" wrapText="true" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0">
+                              <Label fx:id="mottoText" alignment="CENTER" contentDisplay="CENTER" graphicTextGap="2.0" layoutX="55.0" layoutY="59.0" textAlignment="CENTER" textFill="#ff8e8e" wrapText="true" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0">
                                  <font>
-                                    <Font size="15.0" />
+                                    <Font name="PT Mono Bold" size="15.0" />
                                  </font>
                               </Label>
                            </children>
@@ -198,7 +207,7 @@
                   </BorderPane>
                </children>
             </GridPane>
-            <Label fx:id="weekInterval" layoutX="40.0" layoutY="-8.0" prefHeight="22.0" prefWidth="246.0" textFill="WHITE" />
+            <Label fx:id="weekInterval" layoutX="21.0" layoutY="-3.0" prefHeight="22.0" prefWidth="325.0" textFill="#111d27" />
          </children></AnchorPane>
    </center>
 </BorderPane>
