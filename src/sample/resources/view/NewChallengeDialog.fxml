@@ -26,10 +26,10 @@
    <left>
       <AnchorPane prefHeight="254.0" prefWidth="350.0" BorderPane.alignment="CENTER">
          <children>
-            <DatePicker fx:id="startDatePicker" layoutX="5.0" layoutY="40.0" prefHeight="38.0" prefWidth="130.0" AnchorPane.leftAnchor="5.0" AnchorPane.topAnchor="40.0" />
-            <Label alignment="CENTER" layoutX="8.0" layoutY="11.0" prefHeight="23.0" prefWidth="134.0" style="-fx-background-color: #635a6f;" text="Start Date" textFill="WHITE" AnchorPane.leftAnchor="0.0" />
+            <DatePicker fx:id="startDatePicker" editable="false" layoutX="5.0" layoutY="40.0" prefHeight="38.0" prefWidth="130.0" AnchorPane.leftAnchor="5.0" AnchorPane.topAnchor="40.0" />
+            <Label alignment="CENTER" layoutX="8.0" layoutY="11.0" prefHeight="23.0" prefWidth="134.0" style="-fx-background-color: #635a6f;" text="Эхлэх огноо" textFill="WHITE" AnchorPane.leftAnchor="0.0" />
             <TextArea fx:id="challengeDesc" layoutX="5.0" layoutY="125.0" prefHeight="110.0" prefWidth="291.0" />
-            <Label alignment="CENTER" layoutX="10.0" layoutY="87.0" prefHeight="23.0" prefWidth="281.0" style="-fx-background-color: #635a6f;" text="Description" textFill="WHITE" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
+            <Label alignment="CENTER" layoutX="10.0" layoutY="87.0" prefHeight="23.0" prefWidth="281.0" style="-fx-background-color: #635a6f;" text="Тайлбар" textFill="WHITE" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
          </children>
       </AnchorPane>
    </left>
@@ -37,8 +37,8 @@
       <AnchorPane prefHeight="350.0" prefWidth="170.0" BorderPane.alignment="CENTER">
          <children>
             <TextField fx:id="durationField" layoutX="3.0" layoutY="41.0" prefHeight="37.0" prefWidth="120.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="41.0" />
-            <Label layoutX="136.0" layoutY="51.0" prefHeight="17.0" prefWidth="32.0" text="day" />
-            <Label alignment="CENTER" layoutX="43.0" layoutY="12.0" prefHeight="23.0" prefWidth="124.0" style="-fx-background-color: #635a6f;" text="Duration" textFill="WHITE" AnchorPane.rightAnchor="0.0" />
+            <Label layoutX="121.0" layoutY="51.0" prefHeight="17.0" prefWidth="39.0" text="өдөр" />
+            <Label alignment="CENTER" layoutX="43.0" layoutY="12.0" prefHeight="23.0" prefWidth="124.0" style="-fx-background-color: #635a6f;" text="Үргэлжлэх хугацаа" textFill="WHITE" AnchorPane.rightAnchor="0.0" />
          </children>
       </AnchorPane>
    </right>
@@ -47,12 +47,12 @@
          <children>
             <ButtonBar layoutX="-4.0" layoutY="7.0" prefHeight="40.0" prefWidth="288.0">
               <buttons>
-                  <Button fx:id="startBtn" defaultButton="true" mnemonicParsing="false" onAction="#handleStart" prefHeight="35.0" prefWidth="206.0" style="-fx-background-color: white;" text="START" textFill="#635a6f">
+                  <Button fx:id="startBtn" defaultButton="true" mnemonicParsing="false" onAction="#handleStart" prefHeight="35.0" prefWidth="206.0" style="-fx-background-color: white;" text="Эхлэх" textFill="#635a6f">
                      <font>
                         <Font size="15.0" />
                      </font>
                   </Button>
-                  <Button fx:id="cancelBtn" cancelButton="true" mnemonicParsing="false" onAction="#handleCancel" prefHeight="35.0" prefWidth="206.0" style="-fx-background-color: white;" text="CANCEL" textFill="#635a6f">
+                  <Button fx:id="cancelBtn" cancelButton="true" mnemonicParsing="false" onAction="#handleCancel" prefHeight="35.0" prefWidth="206.0" style="-fx-background-color: white;" text="Цуцлах" textFill="#635a6f">
                      <font>
                         <Font size="15.0" />
                      </font>

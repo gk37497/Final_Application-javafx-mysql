@@ -46,32 +46,35 @@ public class TodayPageController {
     public void setMain(Main main){
         this.main = main;
 
+        /* Task -ийн мэдээлэлтэй borderpane -ууд агуулсан ObservableList-ийг цэвэрлэх.*/
         main.getTasksList().clear();
         main.getCompletedTasks().clear();
 
-        FilteredLists.todayTasks(this.main).forEach(e->main.getTasksList().add(service.maker(e,tasksList,completedList)));
-        FilteredLists.todayCompletedTasks(this.main).forEach(e->main.getCompletedTasks().add(service.maker(e,tasksList,completedList)));
+        /* Өнөөдрийн бүх биелэгдээгүй task-ийг service-ийн maker-ээр дамжуулан borderpane болгож дэлгэцэнд хуруулах. */
+        FilteredLists.todayUncompletedTasks(this.main).forEach(e->main.getTasksList().add(service.maker(e,tasksList,completedList , main)));
 
+        /* Өнөөдрийн бүх биелэгдсэн task-ийг service-ийн maker-ээр дамжуулан borderpane болгож дэлгэцэнд хуруулах.*/
+        FilteredLists.todayCompletedTasks(this.main).forEach(e->main.getCompletedTasks().add(service.maker(e,tasksList,completedList,main)));
+
+        /* Хэрэв биелэгдсэн task байхгүй бол (Биелэгдсэн)-хэсгийг харагдахгүй байлгах.*/
         completedLabel.setVisible(main.getCompletedTasks().size() > 0);
         completedList.setVisible(main.getCompletedTasks().size() > 0);
 
         tasksList.setItems(main.getTasksList());
         completedList.setItems(main.getCompletedTasks());
-
     }
 
-//Handle Add button
+//Нэмэх товчлуур дарагдах үед
     public void handleBtn(){
 
         if (validations.todayPage(addTaskField)){
-        String title = addTaskField.getText();
-        LocalDate date = LocalDate.now();
 
-        Task newTask = new Task(title,"task" , false ,date);
-        main.getTasksData().add(newTask);
-        main.getTasksList().add(service.maker(newTask , tasksList,completedList));
+            String title = addTaskField.getText();
+            LocalDate date = LocalDate.now();
+            Task newTask = new Task(title,"task" , false ,date);
 
-        TaskDao.writeTask(newTask);
+            /* шинэ task-ийг өгөгдлийн сан руу нэмж дэлгэцэнд харуулах. */
+            service.addTask(main,newTask,tasksList,completedList);
         }
         addTaskField.setText("");
     }

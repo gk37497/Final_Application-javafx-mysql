@@ -5,7 +5,7 @@ public class Constants {
     String todayPageColor = "#2B6B89";
     String taskPageColor = "#B73A52";
     String challengePageColor = "#635A6F";
-    String dashBoardPageColor = "#B7824D";
+    String dashBoardPageColor = "#384992";
     String weekSchedulePageColor = "#326B70";
 
     String[] dayOfWeek = {"MONDAY" , "TUESDAY","WEDNESDAY","THURSDAY","FRIDAY","SATURDAY","SUNDAY"};

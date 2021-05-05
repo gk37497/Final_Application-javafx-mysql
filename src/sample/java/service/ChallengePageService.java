@@ -23,7 +23,9 @@ public class ChallengePageService {
     public Main main;
 
     ListView<BorderPane> listView;
-    public BorderPane maker(Challenge challenge , ListView<BorderPane> challengesList , Main main) {
+
+    //Зорилтууд хуудасанд мэдээлэл харуулах
+    public BorderPane challengeRowMaker(Challenge challenge , ListView<BorderPane> challengesList , Main main) {
 
         this.listView = challengesList;
         this.main = main;
@@ -32,20 +34,20 @@ public class ChallengePageService {
         rootPane.setId("challengeRow");
 
         Label description = new Label(challenge.getDescription());
-        Label title = new Label(challenge.getTitle());
-        Label endDate = new Label("Finish Date:" + LocalDate.now().plusDays(challenge.getDuration()).toString());
-        Label startedDate = new Label("Started Date:" +  challenge.getStartedDate().toString());
+        Label endDate = new Label("Дуусах огноо:" + LocalDate.now().plusDays(challenge.getDuration()).toString());
+        Label startedDate = new Label("Эхэлсэн огноо:" +  challenge.getStartedDate().toString());
 
-//delete button event
+        //Устгах товчлуурны event
         EventHandler<ActionEvent> event = new EventHandler<ActionEvent>() {
             public void handle(ActionEvent e)
             {
-                Optional<ButtonType> result = Alerts.deleteAlert(dialogStage,"delete" + challenge.getTitle()).showAndWait();
+                Optional<ButtonType> result = Alerts.deleteAlert(dialogStage,"устгах" + challenge.getTitle()).showAndWait();
                 if (result.orElse(ButtonType.CANCEL) == ButtonType.OK){
 
                     ChallengesDao.deleteChallenge(challenge);
                     TaskDao.deleteTask(challenge.getTitle());
-                    main.getTasksData().removeIf(task -> task.getTitle().equals(challenge.getTitle()));
+
+                    main.getTasksData().removeIf(task -> task.getTitle().contains(challenge.getTitle()));
 
                     listView.getItems().remove(rootPane);
                     main.getChallengesData().remove(challenge);
@@ -53,26 +55,25 @@ public class ChallengePageService {
             }
         };
 
-        //Delete button
-        Button delete = new Button("delete");
-        delete.setId("deleteBtn");
-        delete.setOnAction(event);
+        //Устгах товчлуур
+        Button deleteBtn = new Button("устгах");
+        deleteBtn.setId("deleteBtn");
+        deleteBtn.setOnAction(event);
 
-        //Challenge card context
+        // Challenge мөрийн эх бие
         BorderPane cardContext = new BorderPane();
-
         cardContext.setLeft(startedDate);
         cardContext.setCenter(description);
         cardContext.setRight(endDate);
 
-        //Challenge card
+        // Challenge мөрийн гарчгийн хэсэг
         TitledPane challengeCard = new TitledPane();
         challengeCard.setText(challenge.getTitle());
         challengeCard.setContent(cardContext);
         challengeCard.setExpanded(false);
         challengeCard.setPrefHeight(40);
 
-        rootPane.setRight(delete);
+        rootPane.setRight(deleteBtn);
         rootPane.setCenter(challengeCard);
 
         return rootPane;

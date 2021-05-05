@@ -1,6 +1,8 @@
 package sample;
 
 import javafx.application.Application;
+import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleIntegerProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
@@ -52,12 +54,7 @@ public class Main extends Application {
     public ObservableList<BorderPane> getTasksList(){ return tasksList; }
 
     public ObservableList<Challenge> getChallengesData() {
-        checkChallenge();
         return challengesData;
-    }
-
-    public void checkChallenge(){
-        challengesData.removeIf(challenge -> challenge.getType().equals("deleted"));
     }
 
 
@@ -69,7 +66,7 @@ public class Main extends Application {
         this.primaryStage.setTitle("To do list app");
 
         initRootLayout();
-        showTodayPage();
+        showWeekSchedulePage();
     }
 
     /**

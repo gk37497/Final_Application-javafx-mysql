@@ -36,12 +36,6 @@ public class NewChallengeDialogController {
     @FXML
     private TextField durationField;
 
-    @FXML
-    private Button startBtn;
-
-    @FXML
-    private Button cancelBtn;
-
     public Challenge challenge;
 
 //Set Challenge
@@ -75,7 +69,7 @@ public boolean isOkClicked(){
         challenge.setCompleted(false);
 
         for (int i = 0; i < challenge.getDuration(); i++) {
-            Task task = new Task(challenge.getTitle() + " "+ "day" + (i+1),"challenge",false, challenge.getStartedDate().plusDays(i));
+            Task task = new Task(challenge.getTitle() + " "+ "Өдөр" + (i+1),"challenge",false, challenge.getStartedDate().plusDays(i));
             TaskDao.writeTask(task);
             main.getTasksData().add(task);
         }
@@ -84,7 +78,7 @@ public boolean isOkClicked(){
         dialogStage.close();
     }
 }
-
+    //Set Main
     public void setMain(Main main) { this.main = main; }
 
     //Set Stage

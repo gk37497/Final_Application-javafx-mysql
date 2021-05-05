@@ -7,14 +7,12 @@ import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
 import sample.Main;
 import sample.java.model.Challenge;
-import sample.java.model.Task;
-
-
-import java.time.LocalDate;
+import sample.java.service.FilteredLists;
 
 public class DashBoardPageController {
 
     public Main main;
+    public FilteredLists filteredLists = new FilteredLists();
 
     @FXML
     private Label numberOfTodayTasks;
@@ -41,48 +39,50 @@ public class DashBoardPageController {
     private ProgressIndicator challengeProgress;
 
     @FXML
-    private TextField successDay;
+    private Label successDay;
 
     @FXML
-    private TextField unSuccessDay;
+    private Label unSuccessDay;
 
     @FXML
-    private TextField duration;
+    private Label duration;
 
     @FXML
     private Label challengeTitle;
 
-    //set main
+    //Set main
     public void setMain(Main main) {
         this.main = main;
         showStatistics();
         createScrollPane();
     }
-
+    //Статистикуудыг дэлгэцэнд харуулах
     public void showStatistics(){
-        //filtered lists class baiguulaad tendees duudah
-        int n = main.getTasksData().filtered(task -> task.getDate().equals(LocalDate.now())).size();
-        int m = main.getTasksData().filtered(task -> !task.getDate().equals(LocalDate.now())).size();
-        int n1 = main.getTasksData().filtered(task -> task.isCompleted() && task.getDate().equals(LocalDate.now())).size();
-        int m1 = main.getTasksData().filtered(Task::isCompleted).size();
 
-        numberOfTodayTasks.setText(String.valueOf(n));
-        numberOfAllTasks.setText(String.valueOf(m));
+        int todayTasks = FilteredLists.todayTasks(main).size();
+        int allTasks = filteredLists.thisWeekTasks(main).size();
+        int todayCompletedTasks = FilteredLists.todayCompletedTasks(main).size();
+        int allCompletedTasks = FilteredLists.completedTasks(main).size();
 
-        numOfTdComTasks.setText(String.valueOf(n1));
-        numOfAllComTasks.setText(String.valueOf(m1));
+        numberOfTodayTasks.setText(String.valueOf(todayTasks));
+        numberOfAllTasks.setText(String.valueOf(allTasks));
 
-        todayProgress.setProgress( (double) n1 / n);
-        allTasksProgress.setProgress((double) m1 / m);
+        numOfTdComTasks.setText(String.valueOf(todayCompletedTasks));
+        numOfAllComTasks.setText(String.valueOf(allCompletedTasks));
+
+        todayProgress.setProgress( (double) todayCompletedTasks / todayTasks);
+        allTasksProgress.setProgress((double) allCompletedTasks / allTasks);
+
     }
-
+    //Challenge ийн нэртэй товчлуурууд агуулсан scroll pane
     public void createScrollPane(){
         HBox hBox = new HBox(10);
-        main.getChallengesData().forEach(challenge -> hBox.getChildren().add(challengeNameGenerator(challenge)));
+        main.getChallengesData().forEach(challenge -> hBox.getChildren().add(challengeBtn(challenge)));
         challengesName.setContent(hBox);
     }
 
-    public Button challengeNameGenerator(Challenge challenge){
+    //Challenge ийн нэртэй товчлуур үүсгэх
+    public Button challengeBtn(Challenge challenge){
 
         Button button = new Button();
         button.setText(challenge.getTitle());
@@ -93,19 +93,20 @@ public class DashBoardPageController {
                 challengeBtnClicked(challenge);
             }
         };
-        button.setOnAction(event);
 
+        button.setOnAction(event);
+        button.setId("challengeBtn");
         return button;
     }
 
+    // Challenge ийн нэртэй товчуул дарагдах үед
     public void challengeBtnClicked(Challenge challenge){
 
         challengeTitle.setText(challenge.getTitle());
         duration.setText(String.valueOf(challenge.getDuration()));
 
-//bas eniig
-        int sucDay = main.getTasksData().filtered(task -> task.getType().equals("challenge") && task.isCompleted() && task.getTitle().equals(challenge.getTitle())).size();
-        int unSucDay = main.getTasksData().filtered(task -> task.getType().equals("challenge") && !task.isCompleted()).size();
+        int sucDay = FilteredLists.successTasksOfChallenge(main,challenge).size();
+        int unSucDay = FilteredLists.unsuccessfulTasksOfChallenge(main,challenge).size();
 
         successDay.setText(String.valueOf(sucDay));
         unSuccessDay.setText(String.valueOf(unSucDay));

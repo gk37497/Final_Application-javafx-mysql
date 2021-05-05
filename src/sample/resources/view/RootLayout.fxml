@@ -24,7 +24,7 @@
                         </AnchorPane>
                         <AnchorPane fx:id="todayBtn" focusTraversable="true" minHeight="-Infinity" minWidth="-Infinity" prefHeight="35.0" prefWidth="180.0">
                            <children>
-                              <Label layoutX="2.0" layoutY="7.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#showTodayPage" prefHeight="25.0" prefWidth="180.0" text="Today" textFill="WHITE" AnchorPane.bottomAnchor="8.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="8.0">
+                              <Label layoutX="2.0" layoutY="7.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#showTodayPage" prefHeight="25.0" prefWidth="180.0" text="Өнөөдөр" textFill="WHITE" AnchorPane.bottomAnchor="8.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="8.0">
                                  <font>
                                     <Font name="System Bold" size="13.5" />
                                  </font>
@@ -39,12 +39,11 @@
                                  <image>
                                     <Image url="@../images/today.png" />
                                  </image></ImageView>
-                              <Label fx:id="numberOfTodayTask" layoutX="150.0" layoutY="15.0" prefHeight="22.0" prefWidth="24.0" textFill="WHITE" />
                            </children>
                         </AnchorPane>
                         <AnchorPane fx:id="challengesBtn" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#showChallengePage" prefHeight="35.0" prefWidth="180.0">
                            <children>
-                              <Label fx:id="" layoutX="2.0" layoutY="7.0" prefHeight="38.0" prefWidth="180.0" text="Challenges" textFill="WHITE" AnchorPane.bottomAnchor="8.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="8.0">
+                              <Label fx:id="" layoutX="2.0" layoutY="7.0" prefHeight="38.0" prefWidth="180.0" text="Зорилтууд" textFill="WHITE" AnchorPane.bottomAnchor="8.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="8.0">
                                  <font>
                                     <Font name="System Bold" size="13.5" />
                                  </font>
@@ -56,12 +55,11 @@
                                  <image>
                                     <Image url="@../images/challenge.png" />
                                  </image></ImageView>
-                              <Label fx:id="numberOfChallenges" layoutX="151.0" layoutY="9.0" prefHeight="17.0" prefWidth="15.0" textFill="WHITE" />
                            </children>
                         </AnchorPane>
                         <AnchorPane fx:id="taskBtn" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#showTaskPage" prefHeight="35.0" prefWidth="180.0">
                            <children>
-                              <Label layoutX="2.0" layoutY="7.0" prefHeight="38.0" prefWidth="180.0" text="Tasks" textFill="WHITE" AnchorPane.bottomAnchor="8.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="8.0">
+                              <Label layoutX="2.0" layoutY="7.0" prefHeight="38.0" prefWidth="180.0" text="Ажлууд" textFill="WHITE" AnchorPane.bottomAnchor="8.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="8.0">
                                  <font>
                                     <Font name="System Bold" size="13.5" />
                                  </font>
@@ -73,12 +71,11 @@
                                  <image>
                                     <Image url="@../images/task.png" />
                                  </image></ImageView>
-                              <Label fx:id="numberOfAllTasks" layoutX="151.0" layoutY="9.0" prefHeight="17.0" prefWidth="15.0" textFill="WHITE" />
                            </children>
                         </AnchorPane>
                         <AnchorPane fx:id="weekScheduleBtn" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#showWeekSchedulePage" prefHeight="35.0" prefWidth="180.0">
                            <children>
-                              <Label layoutX="2.0" layoutY="7.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="38.0" prefWidth="180.0" text="Week Schedule" textFill="WHITE" AnchorPane.bottomAnchor="8.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="8.0">
+                              <Label layoutX="2.0" layoutY="7.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="38.0" prefWidth="180.0" text="Хуваарь" textFill="WHITE" AnchorPane.bottomAnchor="8.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="8.0">
                                  <font>
                                     <Font name="System Bold" size="13.5" />
                                  </font>
@@ -94,7 +91,7 @@
                         </AnchorPane>
                         <AnchorPane fx:id="dashBoardBtn" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#showDashboardPage" prefHeight="35.0" prefWidth="180.0">
                            <children>
-                              <Label layoutX="2.0" layoutY="7.0" prefHeight="38.0" prefWidth="180.0" text="Dashboard" textFill="WHITE" AnchorPane.bottomAnchor="8.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="8.0">
+                              <Label layoutX="2.0" layoutY="7.0" prefHeight="38.0" prefWidth="180.0" text="Хяналт" textFill="WHITE" AnchorPane.bottomAnchor="8.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="8.0">
                                  <font>
                                     <Font name="System Bold" size="13.5" />
                                  </font>
