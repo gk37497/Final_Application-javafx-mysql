@@ -1,0 +1,68 @@
+.scroll-pane > .viewport {
+   -fx-background-color: transparent;
+}
+
+.scroll-pane {
+    -fx-background-color : transparent;
+}
+
+
+
+.progress-indicator .indicator {
+    -fx-background-color:#384992;
+        -fx-body-color:blue;
+    -fx-background-insets: 1 0 -1 0, 0, 1, 2;
+    -fx-padding: 0.083333em; /* 1 */
+}
+
+#todayProgress .indicator {
+   -fx-background-color: #384992;
+   -fx-background-insets: 1 0 -1 0, 0, 1, 2;
+   -fx-padding: 0.083333em; /* 1 */
+   }
+
+
+#todayProgress .progress{
+    -fx-background-color: #2B6B89;
+
+}
+
+#allTasksProgress .progress{
+    -fx-background-color: #B73A52;
+}
+
+#challengeProgress  .progress{
+   -fx-background-color: #635A6F;
+}
+.progress-indicator .progress {
+    -fx-background-color:
+        linear-gradient(to bottom, derive(-fx-accent,50%), derive(-fx-accent,-60%)),
+        linear-gradient(to bottom, derive(-fx-accent,50%), -fx-accent);
+    -fx-background-insets: 0, 1;
+    -fx-padding: 0.75em; /* 9 */
+}
+
+.progress-indicator .tick {
+    -fx-background-color: -fx-mark-color, #111d27;
+    -fx-background-insets: 1 0 -1 0, 0;
+    -fx-padding: 0.416667em; /* 5 */
+    -fx-scale-shape: false;
+}
+
+.progress-indicator:indeterminate .spinner {
+    -fx-padding: 0.933333em; /* 10 */
+}
+
+.progress-indicator .percentage {
+    -fx-font-size: 1em;
+    -fx-text-fill: white;
+}
+
+.progress-indicator:disabled {
+    -fx-opacity: -fx-disabled-opacity;
+}
+
+#challengeBtn{
+    -fx-background-color:#111d27;
+    -fx-text-fill:#384992;
+}

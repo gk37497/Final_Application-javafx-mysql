@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<jnlp spec="1.0" xmlns:jfx="http://javafx.com" href="Final_Application.jnlp">
+  <information>
+    <title>Final_Application</title>
+    <vendor>Unknown</vendor>
+    <description>Final_Application</description>
+    <offline-allowed/>
+  </information>
+  <resources>
+    <j2se version="1.6+" href="http://java.sun.com/products/autodl/j2se"/>
+    <jar href="Final_Application.jar" size="45907" download="eager" />
+  </resources>
+  <jfx:javafx-desc  width="1000" height="600" main-class="sample.Main"  name="Final_Application" />
+  <update check="background"/>
+</jnlp>
