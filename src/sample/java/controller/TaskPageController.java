@@ -69,9 +69,9 @@ public class TaskPageController {
 
         if (validations.taskPage(taskTitleField , datePicker)) {
 
-            String title =  taskTitleField.getText();
+            String _strTitle =  taskTitleField.getText();
             LocalDate date = datePicker.getValue();
-            Task newTask = new Task(title, "task" , false, date);
+            Task newTask = new Task(_strTitle, "task" , false, date);
 
             /* шинэ task-ийг өгөгдлийн сан руу нэмж дэлгэцэнд харуулах. */
             service.addTask(main,newTask,tasksList,completedList);

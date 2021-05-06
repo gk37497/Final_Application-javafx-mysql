@@ -59,19 +59,19 @@ public class DashBoardPageController {
     //Статистикуудыг дэлгэцэнд харуулах
     public void showStatistics(){
 
-        int todayTasks = FilteredLists.todayTasks(main).size();
-        int allTasks = filteredLists.thisWeekTasks(main).size();
-        int todayCompletedTasks = FilteredLists.todayCompletedTasks(main).size();
-        int allCompletedTasks = FilteredLists.completedTasks(main).size();
+        int _iTodayTasks = FilteredLists.todayTasks(main).size();
+        int _iAllTasks = filteredLists.thisWeekTasks(main).size();
+        int _iTodayCompletedTasks = FilteredLists.todayCompletedTasks(main).size();
+        int _iAllCompletedTasks = FilteredLists.completedTasks(main).size();
 
-        numberOfTodayTasks.setText(String.valueOf(todayTasks));
-        numberOfAllTasks.setText(String.valueOf(allTasks));
+        numberOfTodayTasks.setText(String.valueOf(_iTodayTasks));
+        numberOfAllTasks.setText(String.valueOf(_iAllTasks));
 
-        numOfTdComTasks.setText(String.valueOf(todayCompletedTasks));
-        numOfAllComTasks.setText(String.valueOf(allCompletedTasks));
+        numOfTdComTasks.setText(String.valueOf(_iTodayCompletedTasks));
+        numOfAllComTasks.setText(String.valueOf(_iAllCompletedTasks));
 
-        todayProgress.setProgress( (double) todayCompletedTasks / todayTasks);
-        allTasksProgress.setProgress((double) allCompletedTasks / allTasks);
+        todayProgress.setProgress( (double) _iTodayCompletedTasks / _iTodayTasks);
+        allTasksProgress.setProgress((double) _iAllCompletedTasks / _iAllTasks);
 
     }
     //Challenge ийн нэртэй товчлуурууд агуулсан scroll pane
@@ -105,12 +105,12 @@ public class DashBoardPageController {
         challengeTitle.setText(challenge.getTitle());
         duration.setText(String.valueOf(challenge.getDuration()));
 
-        int sucDay = FilteredLists.successTasksOfChallenge(main,challenge).size();
-        int unSucDay = FilteredLists.unsuccessfulTasksOfChallenge(main,challenge).size();
+        int _iSucDay = FilteredLists.successTasksOfChallenge(main,challenge).size();
+        int _iUnSucDay = FilteredLists.unsuccessfulTasksOfChallenge(main,challenge).size();
 
-        successDay.setText(String.valueOf(sucDay));
-        unSuccessDay.setText(String.valueOf(unSucDay));
+        successDay.setText(String.valueOf(_iSucDay));
+        unSuccessDay.setText(String.valueOf(_iUnSucDay));
 
-        challengeProgress.setProgress((double) sucDay / challenge.getDuration());
+        challengeProgress.setProgress((double) _iSucDay / challenge.getDuration());
     }
 }

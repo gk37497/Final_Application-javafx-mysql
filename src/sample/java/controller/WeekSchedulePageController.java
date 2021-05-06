@@ -141,9 +141,9 @@ public class WeekSchedulePageController {
     }
 
     public static String dateConverter( LocalDate date){
-        int month = date.getMonthValue();
-        int dayOfMonth = date.getDayOfMonth();
-        return (String.valueOf(month) + " сарын " + String.valueOf(dayOfMonth));
+        int _iMonth = date.getMonthValue();
+        int _iDayOfMonth = date.getDayOfMonth();
+        return (String.valueOf(_iMonth) + " сарын " + String.valueOf(_iDayOfMonth));
     }
     //set main
     public void setMain(Main main){

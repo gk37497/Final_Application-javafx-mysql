@@ -1,13 +1,10 @@
 package sample;
 
 import javafx.application.Application;
-import javafx.beans.property.IntegerProperty;
-import javafx.beans.property.SimpleIntegerProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.control.TitledPane;
 import javafx.scene.layout.*;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -16,12 +13,9 @@ import sample.java.dao.ChallengesDao;
 import sample.java.dao.TaskDao;
 import sample.java.model.Challenge;
 import sample.java.model.Task;
-import sample.java.service.FilteredLists;
 
 import java.io.IOException;
 import java.sql.SQLException;
-import java.time.LocalDate;
-import java.time.temporal.TemporalAmount;
 
 public class Main extends Application {
 
@@ -208,7 +202,7 @@ public class Main extends Application {
 
             // Show the dialog and wait until the user closes it
             dialogStage.showAndWait();
-            return controller.isOkClicked();
+            return controller.is_bOkClicked();
         }
         catch (IOException e){
             e.printStackTrace();

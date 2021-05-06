@@ -2,7 +2,6 @@ package sample.java.controller;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
@@ -14,12 +13,10 @@ import sample.java.model.Challenge;
 import sample.java.model.Task;
 import sample.java.service.Validations;
 
-import java.time.LocalDate;
-
 public class NewChallengeDialogController {
 
     public Stage dialogStage;
-    public Boolean okClicked = false;
+    public boolean _bOkClicked = false;
     public Main main;
 
     public Validations validations = new Validations();
@@ -46,8 +43,8 @@ public void setChallenge(Challenge newChallenge, String title){
     challenge.setTitle(title);
 }
 
-public boolean isOkClicked(){
-    return okClicked;
+public boolean is_bOkClicked(){
+    return _bOkClicked;
 }
 
 // Handle Cancel button
@@ -74,7 +71,7 @@ public boolean isOkClicked(){
             main.getTasksData().add(task);
         }
 
-        okClicked = true;
+        _bOkClicked = true;
         dialogStage.close();
     }
 }
