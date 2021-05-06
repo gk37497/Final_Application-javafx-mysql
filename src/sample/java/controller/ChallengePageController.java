@@ -47,9 +47,9 @@ public class ChallengePageController {
 
         if(validations.challengePage(challengeTitleField)){
             Challenge newChallenge = new Challenge();
-            Boolean okClicked = main.showNewChallengeDialog(newChallenge , challengeTitleField.getText());
+            boolean _bOkClicked = main.showNewChallengeDialog(newChallenge , challengeTitleField.getText());
 
-            if (okClicked){
+            if (_bOkClicked){
                 main.getChallengesData().add(newChallenge);
                 main.getChallengeList().add(service.challengeRowMaker(newChallenge, challengesList, this.main));
                 ChallengesDao.writeChallenge(newChallenge);

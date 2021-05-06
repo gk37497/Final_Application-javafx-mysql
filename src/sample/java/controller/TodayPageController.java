@@ -69,9 +69,9 @@ public class TodayPageController {
 
         if (validations.todayPage(addTaskField)){
 
-            String title = addTaskField.getText();
+            String _strTitle = addTaskField.getText();
             LocalDate date = LocalDate.now();
-            Task newTask = new Task(title,"task" , false ,date);
+            Task newTask = new Task(_strTitle,"task" , false ,date);
 
             /* шинэ task-ийг өгөгдлийн сан руу нэмж дэлгэцэнд харуулах. */
             service.addTask(main,newTask,tasksList,completedList);
